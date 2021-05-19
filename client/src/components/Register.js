@@ -3,7 +3,6 @@ import Row from "react-bootstrap/Row" //bootstrap and stylesheets
 import Col from "react-bootstrap/Col"
 import "../styles/Container.css"
 import "../styles/Login.css"
-import {useHistory} from "react-router-dom"; //hook to navigate pages
 import logo from "../public_imgs/logo2.png" //app logo
 import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons'  //Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' //More icons
@@ -13,7 +12,6 @@ import User from "../classes/User"; //User utility class
 import {Link} from "react-router-dom" //Link component to navigate pages
 
 const Register = ()=>{ //Component that lets users register on the app
-    const history=useHistory(); //hook 
     const [password,setPassword]=useState(""); //State variables to register a user
     const [userName,setUsername]=useState("");
     const [email,setEmail]=useState("");

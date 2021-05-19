@@ -12,8 +12,8 @@ import axios from "./axios" //Axios utilty
 import {Link} from "react-router-dom" //Link component
 
 const Login = (props)=>{ //Component that lets users login
-    const history=useHistory(); //hook para navegar a diferentes paginas
-    const [password,setPassword]=useState(""); //variables de estado con el hook usetstate
+    const history=useHistory(); //hook in order to navigate different pages
+    const [password,setPassword]=useState(""); //state variables for user login
     const [userName,setUsername]=useState("");
 
     async function loginUser(){ //Function to let users login to the app
@@ -24,7 +24,7 @@ const Login = (props)=>{ //Component that lets users login
             }
             const res= await axios.post("/loginUser",dataH);
             const data= await res.data.token;
-            if(data!=="failure"){ //if the respinse is succesful let users in, else give an error alert
+            if(data!=="failure"){ //if the response is succesful let users in, else give an error alert
                 welcomeAlert(); 
                 props.allowAccess();
                 localStorage.setItem("authToken",data);
