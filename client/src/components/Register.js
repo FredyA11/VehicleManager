@@ -1,26 +1,26 @@
-import React,{useState} from "react"
-import Row from "react-bootstrap/Row"
+import React,{useState} from "react" //usestate hooks
+import Row from "react-bootstrap/Row" //bootstrap and stylesheets
 import Col from "react-bootstrap/Col"
 import "../styles/Container.css"
 import "../styles/Login.css"
-import {useHistory} from "react-router-dom";
-import logo from "../public_imgs/logo2.png"
+import {useHistory} from "react-router-dom"; //hook to navigate pages
+import logo from "../public_imgs/logo2.png" //app logo
 import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons'  //Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' //More icons
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"; //Alerts
 import axios from "./axios";
-import User from "../classes/User";
-import {Link} from "react-router-dom"
+import User from "../classes/User"; //User utility class
+import {Link} from "react-router-dom" //Link component to navigate pages
 
-const Register = ()=>{
-    const history=useHistory();
-    const [password,setPassword]=useState("");
+const Register = ()=>{ //Component that lets users register on the app
+    const history=useHistory(); //hook 
+    const [password,setPassword]=useState(""); //State variables to register a user
     const [userName,setUsername]=useState("");
     const [email,setEmail]=useState("");
 
 
-    async function createUser(){
-        if(validateInputs()){
+    async function createUser(){ //Function that makes the request to the server in order to create a new user
+        if(validateInputs()){ //If inputs are correct make the request and either show a success or error alert
             const user= new User(userName,email,password);
             const res= await axios.post("/createUser",user);
             const data= await res.data.success;
@@ -37,7 +37,7 @@ const Register = ()=>{
         
     }
 
-    function successAlert(){
+    function successAlert(){ //show success alert
         Swal.fire({
             title: 'Drivvu',
             text: "New Account created",
@@ -46,7 +46,7 @@ const Register = ()=>{
         })
     }
 
-    function errorAlert(msg){
+    function errorAlert(msg){ //show error alert with custom msg
         Swal.fire({
             title: 'Drivvu',
             text: msg,
@@ -55,7 +55,7 @@ const Register = ()=>{
         })
     }
 
-    function validateInputs(){
+    function validateInputs(){  //function to check that all inputs are completed and correctly formatted, returns true if they are correct
         if((userName==="" || userName.includes(".") || userName.includes("$") || userName.includes("#") || userName.includes("[") || userName.includes("]")) || password==="" || email===""){
             return false;
         }
@@ -63,19 +63,19 @@ const Register = ()=>{
     }
 
 
-    function handleUsername(e){
+    function handleUsername(e){ //change state of username when user types
         setUsername(e.target.value);
     }
 
-    function handlePassword(e){
+    function handlePassword(e){ //change state of password when user types
         setPassword(e.target.value);
     }
 
-    function handleEmail(e){
+    function handleEmail(e){ //change state of email when user types
         setEmail(e.target.value);
     }
 
-    return(
+    return( //Render the component
         <div className="container-fluid ">
             <Row className="myC">
                 <Col className="myCol cardContainer" xl={4} lg={10} md={10} sm={10} xs={10}>
@@ -133,4 +133,4 @@ const Register = ()=>{
 
 }
 
-export default Register;
+export default Register; //Make component visible

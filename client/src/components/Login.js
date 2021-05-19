@@ -1,31 +1,31 @@
 import React,{useState} from "react"
-import Row from "react-bootstrap/Row"
+import Row from "react-bootstrap/Row" //Bootstrap and stylesheets
 import Col from "react-bootstrap/Col"
 import "../styles/Container.css"
-import "../styles/Login.css"
-import {useHistory} from "react-router-dom";
-import logo from "../public_imgs/logo2.png"
+import "../styles/Login.css" 
+import {useHistory} from "react-router-dom"; //In order to redirect users to other pages/components
+import logo from "../public_imgs/logo2.png" //App logo
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons'  //Import Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' //More icons
-import Swal from "sweetalert2";
-import axios from "./axios"
-import {Link} from "react-router-dom"
+import Swal from "sweetalert2"; //Alert package
+import axios from "./axios" //Axios utilty
+import {Link} from "react-router-dom" //Link component
 
-const Login = (props)=>{
-    const history=useHistory();
-    const [password,setPassword]=useState("");
+const Login = (props)=>{ //Component that lets users login
+    const history=useHistory(); //hook para navegar a diferentes paginas
+    const [password,setPassword]=useState(""); //variables de estado con el hook usetstate
     const [userName,setUsername]=useState("");
 
-    async function loginUser(){
-        if(validateInputs()){
-            const dataH={
+    async function loginUser(){ //Function to let users login to the app
+        if(validateInputs()){ //Validate that inputs are correct
+            const dataH={ //create the data for axios
                 userName:userName,
                 password:password
             }
             const res= await axios.post("/loginUser",dataH);
             const data= await res.data.token;
-            if(data!=="failure"){
-                welcomeAlert();
+            if(data!=="failure"){ //if the respinse is succesful let users in, else give an error alert
+                welcomeAlert(); 
                 props.allowAccess();
                 localStorage.setItem("authToken",data);
                 history.push("/home");
@@ -41,7 +41,7 @@ const Login = (props)=>{
         
     }
 
-    function welcomeAlert(){
+    function welcomeAlert(){ //function to show alert
         Swal.fire({
             title: 'Drivvu',
             text: "Welcome to Drivvu",
@@ -50,7 +50,7 @@ const Login = (props)=>{
         })
     }
 
-    function errorAlert(msg){
+    function errorAlert(msg){ //function to show error alert with custom msg
         Swal.fire({
             title: 'Drivvu',
             text: msg,
@@ -59,7 +59,7 @@ const Login = (props)=>{
         })
     }
 
-    function validateInputs(){
+    function validateInputs(){ //function to check that all inputs are completed and correctly formatted, returns true if they are correct
         if((userName==="" || userName.includes(".") || userName.includes("$") || userName.includes("#") || userName.includes("[") || userName.includes("]"))  || password===""){
             return false;
         }
@@ -67,15 +67,15 @@ const Login = (props)=>{
     }
 
 
-    function handleUsername(e){
+    function handleUsername(e){ //change state of username variable
         setUsername(e.target.value);
     }
 
-    function handlePassword(e){
+    function handlePassword(e){ //change state of password variable
         setPassword(e.target.value);
     }
 
-    return(
+    return( //render of component
         <div className="container-fluid ">
             <Row className="myC">
                 <Col className="myCol cardContainer" xl={4} lg={10} md={10} sm={10} xs={10}>
@@ -121,4 +121,4 @@ const Login = (props)=>{
 
 }
 
-export default Login;
+export default Login; //make component visible
