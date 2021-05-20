@@ -6,7 +6,7 @@ const AppNav = () =>{ //Component for the navbar (the logo)
 
     return( //Return a normal bootstrap navbar with the software logo on top
         <Navbar className="justify-content-center" >
-            <Navbar.Brand>
+            <Navbar.Brand href="#home">
             <img
                 src={logo}
                 width="200"

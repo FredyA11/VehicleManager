@@ -41,8 +41,8 @@ class EditModal extends React.Component{
                     authorization: "Bearer "+localStorage.getItem("authToken")
                 }
             }).then((response)=>{
-                
-                this.fireSuccessAlert()
+                if(response.data.status==="ok") this.fireSuccessAlert()
+                else this.fireFailureAlert("Oops,someone deleted that vehicle, cant update. . .")
                 
             }).catch((err)=>{
                 this.fireFailureAlert("Oops... something went wrong")
