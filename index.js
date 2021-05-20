@@ -12,7 +12,7 @@ const path=require('path');
 //Initial settings
 app.set("port",process.env.PORT || port) //Definition of the port the server will use, for development it will be port 5000, otherwise use the port in the context where hosted
 //Production
-app.use(express.static(path.join(__dirname,"/build")));
+app.use(express.static(path.join(__dirname,"/client/build")));
 
 
 //Middlewares
