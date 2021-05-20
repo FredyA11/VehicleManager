@@ -29,25 +29,25 @@ const Canvas= (props) =>{ //Component for displaying the vehicle's information t
         
         <Row className="mb-5 justify-content-center animate__fadeInDown animate__animated">
             <DataColumn title1="Plates" var1={props.vehicle.plates} title2="Serial Number" var2={props.vehicle.niv} title3="Vehicle Type" var3={props.vehicle.type}  title4="Fuel Type" var4={props.vehicle.gasoline} />
-            <Col lg={5} xl={5} md={5} sm={5} className="justify-content-center ">
+            <Col lg={5} xl={5} md={5} sm={5} xs={5} className="justify-content-center ">
                 <Row>
                     <Col xl={12} lg={12} sm={12} md={12} className="text-center">
                         <h1 style={{color:"white"}}>{props.vehicle.brand} {props.vehicle.model}</h1> 
                     </Col>
                 </Row>
-                <Row>
-                    <Col xl={12} lg={12} sm={12} md={12} className="justify-content-center d-flex">
-                        <img alt="" src={right} onClick={props.decrement} className="align-self-center" style={{cursor:"pointer"}} width="13%" height="20%" />
-                        <img alt="" src={coche}  width="60%" height="60%" className="align-self-center"></img>
-                        <img alt="" src={next} onClick={props.increment} className="align-self-center" style={{cursor:"pointer"}} width="13%" height="20%" />
+                <Row className="mt-5">
+                    <Col xl={12} lg={12} sm={12} md={12} xs={12} className="justify-content-center d-flex">
+                        <img alt="" src={right} onClick={props.decrement} className="align-self-center img-fluid" style={{cursor:"pointer"}}  />
+                        <img alt="" src={coche}   className="align-self-center img-fluid"></img>
+                        <img alt="" src={next} onClick={props.increment} className="align-self-center img-fluid" style={{cursor:"pointer"}}  />
                     </Col>
                 </Row>
-                <Row className="justify-content-center mt-n4">
-                    <Col xl={6} lg={6} sm={6} md={6} xs={6} className="justify-content-center">
-                        <button onClick={showModal} className="editBtn btn btn-info editBtn animate__animated animate__heartBeat"><FontAwesomeIcon icon={faPencilAlt} /></button>
+                <Row className="justify-content-center mt-2">
+                    <Col xl={6} lg={6} sm={6} md={6} xs={12} className="justify-content-center">
+                        <button onClick={showModal} className="radiusBtn btn btn-info rounded-circle animate__animated animate__heartBeat"><FontAwesomeIcon icon={faPencilAlt} /></button>
                         <h5 className="pt-3" style={{color:"white"}}>E D I T</h5>
                     </Col>
-                    <Col xl={6} lg={6} sm={6} md={6} className="justify-content-center">
+                    <Col xl={6} lg={6} sm={6} md={6} xs={12} className="justify-content-center">
                 
                         <button onClick={props.deleteFunc} className="btn btn-danger deleteBtn animate__animated animate__heartBeat"><FontAwesomeIcon icon={faTrashAlt} /></button>
                         <h5 className="pt-3" style={{color:"white"}}>D E L E T E</h5>
