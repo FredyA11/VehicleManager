@@ -1,15 +1,5 @@
 # Drivvu app
-## How to execute project locally
+## Deployment public url
 
-### 1.
+### 1. https://drivvu-app.herokuapp.com/
 
-```
-npm install
-cd client
-npm install
-
-cd ../
-npm start
-cd client
-npm start
-```
