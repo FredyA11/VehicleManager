@@ -136,10 +136,8 @@ class Container extends React.Component{ //Component that contains the canvas (v
                 }).catch((err)=>{
                     
                 });
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-              
-            }
-          })
+            } 
+        });
         
     }
 
@@ -149,7 +147,7 @@ class Container extends React.Component{ //Component that contains the canvas (v
         }else{
             return(
                 <Row className="justify-content-center ">
-                    <Col lg={11} xl={11} md={11} sm={11} >
+                    <Col lg={11} xl={11} md={11} sm={8} xs={12} >
                         {this.state.empty ? <Empty /> : this.state.canvasArray[this.state.arrayIndex]} 
                         <ButtonsContainer showModal={this.showModal} showModalEdit={this.showEditModal} deleteFunc={this.deleteCar}  />
                         <RegisterModal  show={this.state.showModal} onHide={this.hideModal}  refreshData={this.fetchData} />
