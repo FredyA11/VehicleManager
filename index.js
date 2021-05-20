@@ -175,15 +175,15 @@ app.put('/updateVehicle/:key',verifyToken,(req,res)=>{ //Route that will update 
     const key=req.params.key; //Get the key from the params
     const data=req.body; //Get the req body
     const vehicle= new Vehicle(data.brand,data.plates,data.year,data.currentState,data.model,data.type,data.color,data.niv,data.gasoline,data.circulation) //Create new vehicle instance and populate it with that data from the request
-    db.ref("Vehicles/"+key).once("value").then((data)=>{
+    db.ref("Vehicles/"+key).once("value").then((data)=>{ //Check if vehicle is still on database
         if(data.exists()){
             db.ref("Vehicles/"+key).update(vehicle); //Update doc from firebase
             res.status(200) //OK
-            res.json({status:"ok"}); //Send vehicle
+            res.json({status:"ok"}); //Send ok status
         } 
         else res.json({status:"err"}); //else vehicle doesnt exist
     }).catch((err)=>{
-        res.json({status:"err"}); //Send vehicle
+        res.json({status:"err"}); //Send error
     })
 
    
