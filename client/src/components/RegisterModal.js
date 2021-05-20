@@ -39,7 +39,7 @@ class RegisterModal extends React.Component{ //Component that represents the mod
                 headers:{
                     authorization: "Bearer "+localStorage.getItem("authToken")
                 }
-            }).then((response)=>{
+            }).then((response)=>{ //If response succesful then we fire a success alert and we set the state data back to empty
                 this.fireSuccessAlert()
                 this.setState({
                     brand:"",

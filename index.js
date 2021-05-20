@@ -45,13 +45,13 @@ function verifyToken(req,res,next){
     }
 }
 
-async function encryptPassword(req,res,next){ //Funcion para encriptar la contraseña del usuario
-    const data=req.body; //obtenemos body y luego la contraseña
+async function encryptPassword(req,res,next){ //Function to encrypt the users password
+    const data=req.body; //get the request body and then the password
     var password=data.password;
     const salt=await bcrypt.genSalt();
-    password= await bcrypt.hash(password,salt); //hash de la contraseña
-    req.body.password=password; //reemplazamos la contraseña del request body
-    next(); //seguimos la ejecucion de donde la llamen
+    password= await bcrypt.hash(password,salt); //hash the password
+    req.body.password=password; //replace the password from the body with the new hashed password
+    next(); //continue execution
 }
 
 
