@@ -7,9 +7,17 @@ const port=5000; //Define default port
 const app=express() //Define app
 const bcrypt=require('bcrypt'); //Used to hash the passwords of the users
 const jwt= require('jsonwebtoken');
+const path=require('path');
 
 //Initial settings
 app.set("port",process.env.PORT || port) //Definition of the port the server will use, for development it will be port 5000, otherwise use the port in the context where hosted
+//Production
+
+if(process.env.NODE_ENV==='production'){
+    app.use(express.static('client/build'));       
+}
+
+
 
 //Middlewares
 app.use(cors()) 
@@ -37,17 +45,18 @@ function verifyToken(req,res,next){
     }
 }
 
-async function encryptPassword(req,res,next){ //Funcion para encriptar la contraseña del usuario
-    const data=req.body; //obtenemos body y luego la contraseña
+async function encryptPassword(req,res,next){ //Function to encrypt the users password
+    const data=req.body; //get the request body and then the password
     var password=data.password;
     const salt=await bcrypt.genSalt();
-    password= await bcrypt.hash(password,salt); //hash de la contraseña
-    req.body.password=password; //reemplazamos la contraseña del request body
-    next(); //seguimos la ejecucion de donde la llamen
+    password= await bcrypt.hash(password,salt); //hash the password
+    req.body.password=password; //replace the password from the body with the new hashed password
+    next(); //continue execution
 }
 
 
 //Routes
+
 
 // GETS
 
@@ -56,13 +65,9 @@ app.get("/getCar/:key",verifyToken,(req,res)=>{ //Route that will give the user 
     var vehicle;
     const key=req.params.key;
     db.ref("Vehicles/"+key).once("value").then((snapshot)=>{
-        if(snapshot.exists()){
+        if(snapshot.exists()){ //If there is data
             vehicle=new Vehicle(snapshot.val().brand,snapshot.val().plates,snapshot.val().year,snapshot.val().currentState,snapshot.val().model,
-                    snapshot.val().type,snapshot.val().color,snapshot.val().niv,snapshot.val().gasoline,snapshot.val().circulation);
-            
-        }
-        else{
-
+                                snapshot.val().type,snapshot.val().color,snapshot.val().niv,snapshot.val().gasoline,snapshot.val().circulation);
         }
     });
     res.status(200)
@@ -113,6 +118,7 @@ app.post("/loginUser",async (req,res)=>{ //Route to  login the user, if the pass
         if(snapshot.exists()){ //If the record exsist then we compare the encrypted password with the password from the request, if they match then let the user in
             bcrypt.compare(password,snapshot.val().password,(err,result)=>{
                 if(result){
+                    //Create user object
                     user={
                         username:snapshot.key,
                         email:snapshot.val().email,
@@ -122,20 +128,12 @@ app.post("/loginUser",async (req,res)=>{ //Route to  login the user, if the pass
                         res.json({token:token})
                     });  
                 }
-                else{
-                    res.json({token:"failure"});
-                }
+                else res.json({token:"failure"});
             })
         }
-        else{
-            res.json({
-                token:"failure"
-            })
-        }
+        else res.json({token:"failure"});
     }).catch((err)=>{
-        res.json({
-            token:"failure"
-        })
+        res.json({token:"failure"});
     });
     
 });
@@ -147,21 +145,16 @@ app.post("/createUser",encryptPassword,async (req,res)=>{ //route to create a ne
     const password=data.password;
     db.ref("Users/"+username).once("value").then((snapshot)=>{ //First check if user exists
         if(snapshot.exists()){ //This means someone already has that username, (repeated email are posible)
-            if(snapshot.val().email === email){
-                res.send("Username and email already exists");
-            }
-            else{
-                res.send("Username already exists");
-            }
+            if(snapshot.val().email === email) res.send("Username and email already exists");
+            else res.send("Username already exists");
         }
         else{ //If user doesnt exist, create a new one and store it with data from the request
             db.ref("Users/"+username).set({
                 email:email,
                 password:password
             })
-            res.json({ //return success
-                success:true
-            });
+            //Return success
+            res.json({ success:true});
         }
     })
 
