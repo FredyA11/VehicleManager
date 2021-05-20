@@ -1,7 +1,7 @@
-#Drivvu app
-##How to execute project locally
+# Drivvu app
+## How to execute project locally
 
-###1.
+### 1.
 
 ```
 npm install
