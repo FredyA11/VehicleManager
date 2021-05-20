@@ -25,13 +25,11 @@ const Register = ()=>{ //Component that lets users register on the app
             if(data){
                 successAlert();
             }
-            else{
-                errorAlert("Username or email already exists . . ");
-            }
+            else errorAlert("Username or email already exists . . ");
+            
         }
-        else{
-            errorAlert("Please fill all the required inputs and check that the username does not contain . % $ [ or ] ...");
-        }
+        else errorAlert("Please fill all the required inputs and check that the username does not contain . % $ [ or ] ...");
+        
         
     }
 
@@ -75,8 +73,8 @@ const Register = ()=>{ //Component that lets users register on the app
 
     return( //Render the component
         <div className="container-fluid ">
-            <Row className="myC">
-                <Col className="myCol cardContainer" xl={4} lg={10} md={10} sm={10} xs={10}>
+            <Row className="myC animate__fadeInDown animate__animated">
+                <Col className="myCol cardContainer" xl={4} lg={5} md={6} sm={8} xs={10}>
                     <Row>
                         <Col className="justify-content-center" xl={12} lg={12} md={12} sm={12} xs={12}>
                             <img alt="" className="mx-auto d-block " src={logo} width="30%" heigh="30%" />

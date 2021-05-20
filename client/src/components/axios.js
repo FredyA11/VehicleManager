@@ -1,7 +1,7 @@
 import axios from "axios" //Import axios npm package
 
 const api=axios.create({ //Utility to expose and reuse the axios functions to other components , here are the initial settings for the axios package
-    baseURL:"https://drivvu-app.herokuapp.com/",
+    baseURL:"http://localhost:5000", //For production use the appropiate URL
     timeout:5000
 
 });

@@ -30,15 +30,10 @@ const Login = (props)=>{ //Component that lets users login
                 localStorage.setItem("authToken",data);
                 history.push("/home");
             }
-            else{
-                errorAlert("Password or username invalid . . .");
-            }
+            else errorAlert("Password or username invalid . . .");
+            
         }
-        else{
-            errorAlert("Please fill out all the inputs required and check that username does not contain . $ % [ or ] ");
-        }
-        
-        
+        else errorAlert("Please fill out all the inputs required and check that username does not contain . $ % [ or ] ");
     }
 
     function welcomeAlert(){ //function to show alert
@@ -77,8 +72,8 @@ const Login = (props)=>{ //Component that lets users login
 
     return( //render of component
         <div className="container-fluid ">
-            <Row className="myC">
-                <Col className="myCol cardContainer" xl={4} lg={10} md={10} sm={10} xs={10}>
+            <Row className="myC animate__fadeInDown animate__animated">
+                <Col className="myCol cardContainer" xl={4} lg={5} md={6} sm={8} xs={10}>
                     <Row>
                         <Col className="justify-content-center" xl={12} lg={12} md={12} sm={12} xs={12}>
                             <img alt="" className="mx-auto d-block " src={logo} width="30%" heigh="30%" />

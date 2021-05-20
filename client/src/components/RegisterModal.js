@@ -34,7 +34,7 @@ class RegisterModal extends React.Component{ //Component that represents the mod
         if(this.validateInputs()){ //Validate that all the inputs are correct
             this.props.onHide();
             const vehicle= new Vehicle(this.state.brand,this.state.plates,this.state.year,this.state.currentState,this.state.model,
-                                    this.state.type,this.state.color,this.state.niv,this.state.gasoline,this.state.circulation)
+                                       this.state.type,this.state.color,this.state.niv,this.state.gasoline,this.state.circulation)
             api.post('/createVehicle',vehicle,{
                 headers:{
                     authorization: "Bearer "+localStorage.getItem("authToken")
@@ -58,9 +58,8 @@ class RegisterModal extends React.Component{ //Component that represents the mod
             });
             this.props.refreshData()
         }
-        else{
-            this.fireFailureAlert("Please check that all fields are correct and filled . . .");
-        }
+        else this.fireFailureAlert("Please check that all fields are correct and filled . . .");
+        
         
      
     }

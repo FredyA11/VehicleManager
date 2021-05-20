@@ -14,14 +14,19 @@
     font-size: x-large;
 }
 
+.radiusBtn{
+    width: 5rem;
+    height: 5rem;
+}
+
 .spaceTop{
     margin-top: 3%;
 }
 
 .editBtn{
     border-radius: 50%;
-    width: 5rem;
-    height: 5rem;
+    width: 30%;
+    height: 65%;
     color: white;
-    font-size: x-large;
+    font-size: 160%;
 }
